@@ -155,17 +155,27 @@ const downloadTorrentFile = async (torrent, path, authKey, passKey) => {
 	});
 };
 
-exports.downloadTorrent = async (torrent, authKey, passKey) => {
-	const config = getConfig(),
-		folderExists = await directoryExists(config.downloadPath);
 
-	if(!folderExists) {
-		console.log('Specified downloadPath directory does not exist. Please check your config');
+exports.validateConfig = async () => {
+	const config = getConfig();
+
+	if(config.downloadPath === '') {
+		console.log('Specified downloadPath directory does not exist. Please check your config.');
 		process.exit();
 	}
+	
+	const folderExists = await directoryExists(config.downloadPath);
 
+	if(!folderExists) {
+		console.log('Specified downloadPath directory does not exist. Please check your config.');
+		process.exit();
+	}
+}
+
+
+exports.downloadTorrent = async (torrent, downloadPath, authKey, passKey) => {
 	try {
-		return await downloadTorrentFile(torrent, config.downloadPath, authKey, passKey);
+		return await downloadTorrentFile(torrent, downloadPath, authKey, passKey);
 	} catch(error) {
 		console.log('Could not download torrent:', error);
 	}
