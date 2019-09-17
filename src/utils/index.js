@@ -45,6 +45,22 @@ exports.writeTorrentCache = torrents => {
 	});
 };
 
+exports.validateConfig = async () => {
+	const config = getConfig();
+
+	if(config.downloadPath === '') {
+		console.log('Specified downloadPath directory does not exist. Please check your config.');
+		process.exit();
+	}
+	
+	const folderExists = await directoryExists(config.downloadPath);
+
+	if(!folderExists) {
+		console.log('Specified downloadPath directory does not exist. Please check your config.');
+		process.exit();
+	}
+};
+
 const getTorrentsFromResponse = data => {
 	return data.Movies.map(group => {
 		const torrent = group.Torrents[0];
@@ -100,40 +116,28 @@ exports.shouldDownloadTorrent = torrent => {
 		return false;
 	}
 
-	if(config.minSeeders !== -1) {
-		if(torrent.Seeders <= config.minSeeders) {
-			shouldDownload = false;
-		}
+	if(config.minSeeders !== -1 && torrent.Seeders <= config.minSeeders) {
+		shouldDownload = false;
 	}
 
-	if(config.maxSeeders !== -1) {
-		if(torrent.Seeders >= config.maxSeeders) {
-			shouldDownload = false;
-		}
+	if(config.maxSeeders !== -1 && torrent.Seeders >= config.maxSeeders) {
+		shouldDownload = false;
 	}
 
-	if(config.minLeechers !== -1) {
-		if(torrent.Leechers <= config.minLeechers) {
-			shouldDownload = false;
-		}
+	if(config.minLeechers !== -1 && torrent.Leechers <= config.minLeechers) {
+		shouldDownload = false;
 	}
 
-	if(config.maxLeechers !== -1) {
-		if(torrent.Leechers >= config.maxLeechers) {
-			shouldDownload = false;
-		}
+	if(config.maxLeechers !== -1 && torrent.Leechers >= config.maxLeechers) {
+		shouldDownload = false;
 	}
 
-	if(config.minSize !== -1) {
-		if(torrent.Size <= config.minSize) {
-			shouldDownload = false;
-		}
+	if(config.minSize !== -1 && torrent.Size <= config.minSize) {
+		shouldDownload = false;
 	}
 
-	if(config.maxSize !== -1) {
-		if(torrent.Size >= config.maxSize) {
-			shouldDownload = false;
-		}
+	if(config.maxSize !== -1 && torrent.Size >= config.maxSize) {
+		shouldDownload = false;
 	}
 
 	return shouldDownload;
@@ -154,24 +158,6 @@ const downloadTorrentFile = async (torrent, path, authKey, passKey) => {
 		});
 	});
 };
-
-
-exports.validateConfig = async () => {
-	const config = getConfig();
-
-	if(config.downloadPath === '') {
-		console.log('Specified downloadPath directory does not exist. Please check your config.');
-		process.exit();
-	}
-	
-	const folderExists = await directoryExists(config.downloadPath);
-
-	if(!folderExists) {
-		console.log('Specified downloadPath directory does not exist. Please check your config.');
-		process.exit();
-	}
-}
-
 
 exports.downloadTorrent = async (torrent, downloadPath, authKey, passKey) => {
 	try {
