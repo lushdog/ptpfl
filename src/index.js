@@ -1,5 +1,4 @@
-const fetch = require('node-fetch'),
-	utils = require('./utils');
+const utils = require('./utils');
 
 module.exports = async function() {
 	try {
