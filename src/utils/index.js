@@ -19,11 +19,6 @@ const getConfig = () => {
 	}
 };
 
-function requireUncached(require, module) {
-    delete require.cache[require.resolve(module)];
-    return require(module);
-}
-
 const getCache = () => {
 	try {
 		return importFresh(cachePath);
@@ -37,6 +32,9 @@ const getCache = () => {
 	}
 };
 
+exports.getCache = getCache;
+exports.getConfig = getConfig;
+
 exports.writeTorrentCache = torrents => {
 	const cache = {
 		freeleech: torrents.map(torrent => torrent.Id)
@@ -46,9 +44,6 @@ exports.writeTorrentCache = torrents => {
 		encoding: 'utf8'
 	});
 };
-
-exports.getCache = getCache;
-exports.getConfig = getConfig;
 
 const getTorrentsFromResponse = data => {
 	return data.Movies.map(group => {
