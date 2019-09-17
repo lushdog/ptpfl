@@ -59,6 +59,8 @@ exports.validateConfig = async () => {
 		console.log('Specified downloadPath directory does not exist. Please check your config.');
 		process.exit();
 	}
+
+	return config;
 };
 
 const getTorrentsFromResponse = data => {
@@ -68,6 +70,7 @@ const getTorrentsFromResponse = data => {
 		torrent.Seeders = Number(torrent.Seeders);
 		torrent.Leechers = Number(torrent.Leechers);
 		torrent.Size = Number(torrent.Size);
+		torrent.GroupId = group.GroupId;
 
 		return torrent;
 	});
@@ -106,11 +109,10 @@ exports.fetchTorrents = async (apiUser, apiKey) => {
 	}
 };
 
-exports.shouldDownloadTorrent = torrent => {
+exports.shouldDownloadTorrent = (torrent, config) => {
 	let shouldDownload = true;
 
-	const config = getConfig(),
-		cache = getCache();
+	const cache = getCache();
 
 	if(cache.freeleech.includes(torrent.Id)) {
 		return false;
