@@ -154,6 +154,7 @@ const downloadTorrentFile = async (torrent, path, authKey, passKey) => {
 			reject(error);
 		});
 		fileStream.on("finish", function() {
+			console.log(`\nSaved: ${torrent.ReleaseName}`);
 			resolve();
 		});
 	});
