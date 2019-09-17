@@ -7,5 +7,6 @@
 	"maxLeechers": -1,
 	"minSize": -1,
 	"maxSize": -1,
-	"downloadPath": ""
+	"downloadPath": "",
+	"discordWebhookUrl": ""
 }
