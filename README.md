@@ -8,6 +8,8 @@ A node.js script that automates the downloading of PassThePopcorn freeleech torr
 
 Copy `example.config.json` to `config.json` and fill in your apiUser and apiKey credentials from your user profile.
 
+Add a `downloadPath` to `config.json` to have the torrents added to your torrent client's watch directory.
+
 ### To run
 
 `npm start`
