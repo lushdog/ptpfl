@@ -112,7 +112,7 @@ exports.shouldDownloadTorrent = torrent => {
 	const config = getConfig(),
 		cache = getCache();
 
-	if(!config.downloadPath || cache.freeleech.includes(torrent.Id)) {
+	if(cache.freeleech.includes(torrent.Id)) {
 		return false;
 	}
 
