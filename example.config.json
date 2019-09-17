@@ -1,0 +1,11 @@
+{
+	"apiUser": "",
+	"apiKey": "",
+	"minSeeders": -1,
+	"maxSeeders": -1,
+	"minLeechers": -1,
+	"maxLeechers": -1,
+	"minSize": -1,
+	"maxSize": -1,
+	"downloadPath": ""
+}

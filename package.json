@@ -1,0 +1,16 @@
+{
+  "name": "ptp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "directory-exists": "^2.0.1",
+    "import-fresh": "^3.1.0",
+    "node-fetch": "^2.6.0"
+  }
+}
