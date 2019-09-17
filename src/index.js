@@ -1,5 +1,6 @@
 const utils = require('./utils'),
-	sendDiscordNotification = require('./modules/discord');
+	sendDiscordNotification = require('./modules/discord'),
+	downloadTorrent = require('./modules/download');
 
 module.exports = async function() {
 	try {
@@ -7,9 +8,9 @@ module.exports = async function() {
 			{ torrents, authKey, passKey } = await utils.fetchTorrents(config.apiUser, config.apiKey);
 
 		for (const torrent of torrents) {
-			if(utils.shouldDownloadTorrent(torrent, config)) {
+			if(utils.torrentMatchesFilters(torrent, config)) {
 				if(config.downloadPath) {
-					await utils.downloadTorrent({ torrent, authKey, passKey }, config.downloadPath);
+					await downloadTorrent({ torrent, authKey, passKey }, config);
 				}
 				
 				if(config.discordWebhookUrl) {

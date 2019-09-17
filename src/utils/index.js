@@ -109,8 +109,8 @@ exports.fetchTorrents = async (apiUser, apiKey) => {
 	}
 };
 
-exports.shouldDownloadTorrent = (torrent, config) => {
-	let shouldDownload = true;
+exports.torrentMatchesFilters = (torrent, config) => {
+	let isMatch = true;
 
 	const cache = getCache();
 
@@ -119,55 +119,30 @@ exports.shouldDownloadTorrent = (torrent, config) => {
 	}
 
 	if(config.minSeeders !== -1 && torrent.Seeders <= config.minSeeders) {
-		shouldDownload = false;
+		isMatch = false;
 	}
 
 	if(config.maxSeeders !== -1 && torrent.Seeders >= config.maxSeeders) {
-		shouldDownload = false;
+		isMatch = false;
 	}
 
 	if(config.minLeechers !== -1 && torrent.Leechers <= config.minLeechers) {
-		shouldDownload = false;
+		isMatch = false;
 	}
 
 	if(config.maxLeechers !== -1 && torrent.Leechers >= config.maxLeechers) {
-		shouldDownload = false;
+		isMatch = false;
 	}
 
 	if(config.minSize !== -1 && torrent.Size <= config.minSize) {
-		shouldDownload = false;
+		isMatch = false;
 	}
 
 	if(config.maxSize !== -1 && torrent.Size >= config.maxSize) {
-		shouldDownload = false;
+		isMatch = false;
 	}
 
-	return shouldDownload;
-};
-
-const downloadTorrentFile = async (torrent, path, authKey, passKey) => {
-	const url = `https://passthepopcorn.me/torrents.php?action=download&id=${torrent.Id}&authkey=${authKey}&torrent_pass=${passKey}`,
-		response = await fetch(url),
-		fileStream = fs.createWriteStream(`${path}/${torrent.Id}.torrent`);
-
-	return await new Promise((resolve, reject) => {
-		response.body.pipe(fileStream);
-		response.body.on("error", error => {
-			reject(error);
-		});
-		fileStream.on("finish", function() {
-			console.log(`\nSaved: ${torrent.ReleaseName}`);
-			resolve();
-		});
-	});
-};
-
-exports.downloadTorrent = async ({ torrent, authKey, passKey }, downloadPath) => {
-	try {
-		return await downloadTorrentFile(torrent, downloadPath, authKey, passKey);
-	} catch(error) {
-		console.log('Could not download torrent:', error);
-	}
+	return isMatch;
 };
 
 exports.formatBytes = bytes =>{
