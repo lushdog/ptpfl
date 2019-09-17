@@ -8,7 +8,9 @@ module.exports = async function() {
 
 		for (const torrent of torrents) {
 			if(utils.shouldDownloadTorrent(torrent, config)) {
-				await utils.downloadTorrent({ torrent, authKey, passKey }, config.downloadPath);
+				if(config.downloadPath) {
+					await utils.downloadTorrent({ torrent, authKey, passKey }, config.downloadPath);
+				}
 				
 				if(config.discordWebhookUrl) {
 					await sendDiscordNotification({ torrent, authKey, passKey }, config);
