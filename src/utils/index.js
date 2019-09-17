@@ -148,10 +148,10 @@ const downloadTorrentFile = async (torrent, path, authKey, passKey) => {
 		response = await fetch(url),
 		fileStream = fs.createWriteStream(`${path}/${torrent.Id}.torrent`);
 
-	await new Promise((resolve, reject) => {
+	return await new Promise((resolve, reject) => {
 		response.body.pipe(fileStream);
-		response.body.on("error", (err) => {
-			reject(err);
+		response.body.on("error", error => {
+			reject(error);
 		});
 		fileStream.on("finish", function() {
 			resolve();
