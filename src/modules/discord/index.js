@@ -37,4 +37,5 @@ module.exports = async ({ torrent, authKey, passKey }, config) => {
 		.addField('Download URL', `[Click Here](${download})`, true);
 
 	webhook.send(embed);
+	console.log(`\Discord Webook sent: ${torrent.ReleaseName}`);
 };

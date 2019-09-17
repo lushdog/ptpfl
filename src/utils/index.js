@@ -46,17 +46,18 @@ exports.writeTorrentCache = torrents => {
 };
 
 exports.validateConfig = async () => {
-	const config = getConfig();
+	const config = getConfig(),
+		error = 'Specified downloadPath directory does not exist. Please check your config.';
 
 	if(config.downloadPath === '') {
-		console.log('Specified downloadPath directory does not exist. Please check your config.');
+		console.log(error);
 		process.exit();
 	}
 	
 	const folderExists = await directoryExists(config.downloadPath);
 
 	if(!folderExists) {
-		console.log('Specified downloadPath directory does not exist. Please check your config.');
+		console.log(error);
 		process.exit();
 	}
 
@@ -109,6 +110,13 @@ exports.fetchTorrents = async (apiUser, apiKey) => {
 	}
 };
 
+const isOlderThan = (date, minutes) => {
+	const earliest = 1000 * minutes * 60,
+		time = Date.now() - earliest;
+	
+	return new Date(date) < time;
+};
+
 exports.torrentMatchesFilters = (torrent, config) => {
 	let isMatch = true;
 
@@ -139,6 +147,10 @@ exports.torrentMatchesFilters = (torrent, config) => {
 	}
 
 	if(config.maxSize !== -1 && torrent.Size >= config.maxSize) {
+		isMatch = false;
+	}
+
+	if(config.maxAge !== -1 && isOlderThan(torrent.UploadTime, config.maxAge)) {
 		isMatch = false;
 	}
 
