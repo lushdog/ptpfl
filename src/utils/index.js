@@ -13,7 +13,6 @@ const getConfig = () => {
 	} catch(error) {
 		if(error.message.includes('Cannot find module')) {
 			console.log('Please ensure you\'ve created and filled in the config.json file');
-
 			process.exit();
 		}
 	}
@@ -26,7 +25,6 @@ const getCache = () => {
 		if(error.message.includes('Cannot find module')) {
 			return { freeleech: [] };
 		}
-
 		console.log(error);
 		process.exit();
 	}
@@ -46,11 +44,6 @@ exports.validateConfig = async () => {
 	const config = getConfig(),
 		error = 'Specified downloadPath directory does not exist. Please check your config.';
 
-	if(config.downloadPath === '') {
-		console.log(error);
-		process.exit();
-	}
-	
 	const folderExists = await directoryExists(config.downloadPath);
 
 	if(!folderExists) {
