@@ -1,14 +1,14 @@
-const utils = require('./utils'),
+const { validateConfig, fetchTorrents, torrentMatchesFilters, writeTorrentCache } = require('./utils'),
 	sendDiscordNotification = require('./modules/discord'),
 	downloadTorrent = require('./modules/download');
 
 module.exports = async function() {
 	try {
-		const config = await utils.validateConfig(),
-			{ torrents, authKey, passKey } = await utils.fetchTorrents(config.apiUser, config.apiKey);
+		const config = await validateConfig(),
+			{ torrents, authKey, passKey } = await fetchTorrents(config.apiUser, config.apiKey);
 
 		for (const torrent of torrents) {
-			if(utils.torrentMatchesFilters(torrent, config)) {
+			if(torrentMatchesFilters(torrent, config)) {
 				if(config.downloadPath) {
 					await downloadTorrent({ torrent, authKey, passKey }, config);
 				}
@@ -19,7 +19,7 @@ module.exports = async function() {
 			}
 		}
 
-		utils.writeTorrentCache(torrents);
+		writeTorrentCache(torrents);
 	} catch(error) {
 		console.log(error);
 	}
