@@ -8,14 +8,12 @@ module.exports = async function() {
 			{ torrents, authKey, passKey } = await fetchTorrents(config.apiUser, config.apiKey);
 
 		for (const torrent of torrents) {
-			if(torrentMatchesFilters(torrent, config)) {
-				if(config.downloadPath) {
-					await downloadTorrent({ torrent, authKey, passKey }, config);
-				}
-				
-				if(config.discordWebhookUrl) {
-					await sendDiscordNotification({ torrent, authKey, passKey }, config);
-				}
+			if (torrentMatchesFilters(torrent, config)) {
+
+				await downloadTorrent({ torrent, authKey, passKey }, config);
+
+				await sendDiscordNotification({ torrent, authKey, passKey }, config);
+
 			}
 		}
 

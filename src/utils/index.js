@@ -12,7 +12,7 @@ const getConfig = () => {
 	try {
 		return importFresh(configPath);
 	} catch(error) {
-		if(error.message.includes('Cannot find module')) {
+		if (error.message.includes('Cannot find module')) {
 			console.log('Please ensure you\'ve created and filled in the config.json file');
 			process.exit();
 		}
@@ -23,11 +23,11 @@ exports.validateConfig = async () => {
 	const config = getConfig(),
 		error = 'Specified downloadPath directory does not exist. Please check your config.';
 
-	if(!config.downloadPath) return config;
+	if (!config.downloadPath) return config;
 
 	const folderExists = await directoryExists(config.downloadPath);
 
-	if(!folderExists) {
+	if (!folderExists) {
 		console.log(error);
 		process.exit();
 	}
@@ -39,7 +39,7 @@ const getCache = () => {
 	try {
 		return importFresh(cachePath);
 	} catch(error) {
-		if(error.message.includes('Cannot find module')) {
+		if (error.message.includes('Cannot find module')) {
 			return { freeleech: [] };
 		}
 		console.log(error);
@@ -81,7 +81,7 @@ const checkStatus = response => new Promise((resolve, reject) => {
 });
 
 exports.fetchTorrents = async (apiUser, apiKey) => {
-	if(!apiUser || !apiKey) {
+	if (!apiUser || !apiKey) {
 		console.log('Please ensure you\'ve added your ApiUser and ApiKey details from your PTP profile to the config file. See the example config file for details.');
 		process.exit();
 	}
@@ -119,35 +119,35 @@ exports.torrentMatchesFilters = (torrent, config) => {
 
 	const cache = getCache();
 
-	if(cache.freeleech.includes(torrent.Id)) {
+	if (cache.freeleech.includes(torrent.Id)) {
 		return false;
 	}
 
-	if(config.minSeeders !== -1 && torrent.Seeders <= config.minSeeders) {
+	if (config.minSeeders !== -1 && torrent.Seeders <= config.minSeeders) {
 		isMatch = false;
 	}
 
-	if(config.maxSeeders !== -1 && torrent.Seeders >= config.maxSeeders) {
+	if (config.maxSeeders !== -1 && torrent.Seeders >= config.maxSeeders) {
 		isMatch = false;
 	}
 
-	if(config.minLeechers !== -1 && torrent.Leechers <= config.minLeechers) {
+	if (config.minLeechers !== -1 && torrent.Leechers <= config.minLeechers) {
 		isMatch = false;
 	}
 
-	if(config.maxLeechers !== -1 && torrent.Leechers >= config.maxLeechers) {
+	if (config.maxLeechers !== -1 && torrent.Leechers >= config.maxLeechers) {
 		isMatch = false;
 	}
 
-	if(config.minSize !== -1 && torrent.Size <= config.minSize) {
+	if (config.minSize !== -1 && torrent.Size <= config.minSize) {
 		isMatch = false;
 	}
 
-	if(config.maxSize !== -1 && torrent.Size >= config.maxSize) {
+	if (config.maxSize !== -1 && torrent.Size >= config.maxSize) {
 		isMatch = false;
 	}
 
-	if(config.maxAge !== -1 && isOlderThan(torrent.UploadTime, config.maxAge)) {
+	if (config.maxAge !== -1 && isOlderThan(torrent.UploadTime, config.maxAge)) {
 		isMatch = false;
 	}
 
@@ -155,7 +155,7 @@ exports.torrentMatchesFilters = (torrent, config) => {
 };
 
 exports.formatBytes = bytes =>{
-	if(bytes === 0){
+	if (bytes === 0){
 		return '0 B';
 	}
 

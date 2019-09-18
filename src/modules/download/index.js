@@ -19,6 +19,10 @@ const downloadTorrentFile = async (torrent, path, authKey, passKey) => {
 };
 
 module.exports = async ({ torrent, authKey, passKey }, config) => {
+	if (!config.downloadPath) {
+		return;
+	}
+
 	try {
 		return await downloadTorrentFile(torrent, config.downloadPath, authKey, passKey);
 	} catch(error) {

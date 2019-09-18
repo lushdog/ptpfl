@@ -6,7 +6,7 @@ const getDiscordClient = (() => {
 	let discordClient;
 
 	return async discordWebhookUrl => {
-		if(discordClient) {
+		if (discordClient) {
 			return new Promise(resolve => resolve(discordClient));;
 		}
 
@@ -20,6 +20,10 @@ const getDiscordClient = (() => {
 })();
 
 module.exports = async ({ torrent, authKey, passKey }, config) => {
+	if (!config.discordWebhookUrl) {
+		return;
+	}
+
 	const webhook = await getDiscordClient(config.discordWebhookUrl);
 
 	const download = `https://passthepopcorn.me/torrents.php?action=download&id=${torrent.Id}&authkey=${authKey}&torrent_pass=${passKey}`,
