@@ -19,6 +19,22 @@ const getConfig = () => {
 	}
 };
 
+exports.validateConfig = async () => {
+	const config = getConfig(),
+		error = 'Specified downloadPath directory does not exist. Please check your config.';
+
+	if(!config.downloadPath) return config;
+
+	const folderExists = await directoryExists(config.downloadPath);
+
+	if(!folderExists) {
+		console.log(error);
+		process.exit();
+	}
+
+	return config;
+};
+
 const getCache = () => {
 	try {
 		return importFresh(cachePath);
@@ -39,22 +55,6 @@ exports.writeTorrentCache = torrents => {
 	fs.writeFileSync(cachePath, JSON.stringify(cache), {
 		encoding: 'utf8'
 	});
-};
-
-exports.validateConfig = async () => {
-	const config = getConfig(),
-		error = 'Specified downloadPath directory does not exist. Please check your config.';
-
-	if(!config.downloadPath) return config;
-
-	const folderExists = await directoryExists(config.downloadPath);
-
-	if(!folderExists) {
-		console.log(error);
-		process.exit();
-	}
-
-	return config;
 };
 
 const getTorrentsFromResponse = data => {
