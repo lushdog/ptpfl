@@ -44,6 +44,8 @@ exports.validateConfig = async () => {
 	const config = getConfig(),
 		error = 'Specified downloadPath directory does not exist. Please check your config.';
 
+	if(!config.downloadPath) return config;
+
 	const folderExists = await directoryExists(config.downloadPath);
 
 	if(!folderExists) {
