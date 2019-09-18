@@ -32,9 +32,6 @@ const getCache = () => {
 	}
 };
 
-exports.getCache = getCache;
-exports.getConfig = getConfig;
-
 exports.writeTorrentCache = torrents => {
 	const cache = {
 		freeleech: torrents.map(torrent => torrent.Id)
