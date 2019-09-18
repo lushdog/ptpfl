@@ -9,11 +9,9 @@ module.exports = async function() {
 
 		for (const torrent of torrents) {
 			if (torrentMatchesFilters(torrent, config)) {
-
 				await downloadTorrent({ torrent, authKey, passKey }, config);
 
 				await sendDiscordNotification({ torrent, authKey, passKey }, config);
-
 			}
 		}
 
