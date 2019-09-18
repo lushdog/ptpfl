@@ -5,7 +5,8 @@ const path = require('path'),
 	directoryExists = require('directory-exists');
 
 const configPath = path.join(__dirname, '../../config.json'),
-	cachePath = path.join(__dirname, '../../data/cache.json');
+	cachePath = path.join(__dirname, '../../data/cache.json'),
+	freeleechEndpoint = 'https://passthepopcorn.me/torrents.php?freetorrent=1&grouping=0&json=noredirect';
 
 const getConfig = () => {
 	try {
@@ -86,15 +87,19 @@ exports.fetchTorrents = async (apiUser, apiKey) => {
 	}
 
 	try {
-		return await fetch('https://passthepopcorn.me/torrents.php?freetorrent=1&grouping=0&json=noredirect', {
+		const response = await fetch(freeleechEndpoint, {
 			headers: {
 				'ApiUser': apiUser,
 				'ApiKey': apiKey
 			}
-		}).then(checkStatus).then(response => response.json()).then(json => new Promise((resolve, reject) => {
-			const torrents = getTorrentsFromResponse(json);
-			resolve({ torrents, authKey: json.AuthKey, passKey: json.PassKey });
-		})).catch(error => console.log(error));
+		});
+
+		await checkStatus(response);
+
+		const json = await response.json(),
+			torrents = getTorrentsFromResponse(json);
+
+		return { torrents, authKey: json.AuthKey, passKey: json.PassKey };
 	} catch(error) {
 
 		console.log(error);
