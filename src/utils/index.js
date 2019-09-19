@@ -119,6 +119,9 @@ exports.torrentMatchesFilters = (torrent, config) => {
 
 	const cache = getCache();
 
+	const minSize = config.minsize === -1 ? -1 : Number(config.minsize) * 1024 * 1024,
+		maxSize = config.maxsize === -1 ? -1 : Number(config.maxsize) * 1024 * 1024;
+
 	if (cache.freeleech.includes(torrent.Id)) {
 		return false;
 	}
@@ -139,11 +142,11 @@ exports.torrentMatchesFilters = (torrent, config) => {
 		isMatch = false;
 	}
 
-	if (config.minSize !== -1 && torrent.Size <= config.minSize) {
+	if (minSize !== -1 && torrent.Size <= minSize) {
 		isMatch = false;
 	}
 
-	if (config.maxSize !== -1 && torrent.Size >= config.maxSize) {
+	if (maxSize !== -1 && torrent.Size >= maxSize) {
 		isMatch = false;
 	}
 
