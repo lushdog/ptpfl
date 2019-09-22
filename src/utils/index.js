@@ -39,7 +39,7 @@ const getCache = () => {
 	try {
 		return importFresh(cachePath);
 	} catch(error) {
-		if (error.message.includes('Cannot find module')) {
+		if (error.message.includes('Cannot find module') || error.message.includes('Unexpected end of JSON input')) {
 			return { freeleech: [] };
 		}
 		console.log(error);
