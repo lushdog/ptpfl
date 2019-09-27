@@ -2,10 +2,10 @@ const app = require('./src')
 const schedule = require('node-schedule')
 const { interval } = require('./config.json')
 
-const index = 1
+let index = 1
 const scheduleJob = async () => { 
   console.log(index)
-  index++
+  index ++
   await app() 
 }
 
