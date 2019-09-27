@@ -1,3 +1,5 @@
+const dayjs = require('dayjs')
+
 const path = require('path'),
 	fs = require('fs'),
 	fetch = require('node-fetch'),
@@ -110,10 +112,11 @@ exports.fetchTorrents = async (apiUser, apiKey) => {
 };
 
 const isOlderThan = (date, minutes) => {
+	const uploadTime = dayjs(date).add(8, 'hours')
 	const earliest = 1000 * minutes * 60,
 		time = Date.now() - earliest;
 	
-	return new Date(date) < time;
+	return new Date(uploadTime) < time;
 };
 
 exports.torrentMatchesFilters = (torrent, config) => {
