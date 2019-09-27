@@ -9,5 +9,6 @@
 	"maxSize": -1,
 	"maxAge": -1,
 	"downloadPath": "",
-	"discordWebhookUrl": ""
+	"discordWebhookUrl": "",
+	"interval": 10
 }

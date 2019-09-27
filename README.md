@@ -12,7 +12,11 @@ Add a `downloadPath` to `config.json` to have the torrents added to your torrent
 
 ### To run
 
-`npm start`
+Need pm2
+
+`npm install pm2 -g`
+
+`pm2 start index.js`
 
 ### Discord notifications
 
@@ -35,6 +39,7 @@ Configuration options with defaults shown
   "maxAge": -1, // Maximum time in minutes since torrent was uploaded. See below note.
   "downloadPath": "", // Path to download .torrent files to. Optional.
   "discordWebhookUrl": "" // Discord webhook URI. Optional.
+  "interval": 15 // Download interval.
 }
 ```
 
