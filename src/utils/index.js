@@ -98,7 +98,6 @@ exports.fetchTorrents = async (apiUser, apiKey) => {
 
 		const json = await response.json(),
 		torrents = getTorrentsFromResponse(json);
-		console.log(json)
 
 		return { torrents, authKey: json.AuthKey, passKey: json.PassKey };
 	} catch(error) {
