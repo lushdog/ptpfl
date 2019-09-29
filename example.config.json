@@ -10,5 +10,9 @@
 	"maxAge": -1,
 	"downloadPath": "",
 	"discordWebhookUrl": "",
-	"interval": 10
+	"interval": 10,
+	"matchByAgeAndMaxSeeders": [
+    { "maxAge": 600, "maxSeeders": 5 },
+    { "maxAge": 1200, "maxSeeders": 2 }
+  ]
 }
