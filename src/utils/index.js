@@ -159,6 +159,14 @@ exports.torrentMatchesFilters = (torrent, config) => {
 		isMatch = false;
 	}
 
+	for (let index = 0; index < config.matchByAgeAndMaxSeeders.length; index ++) {
+		let rule = config.matchByAgeAndMaxSeeders[index]
+		if (!isOlderThan(torrent.UploadTime, rule.maxAge) && (torrent.Seeders <= rule.maxSeeders)) {
+			isMatch = true;
+			break;
+		}
+	}
+
 	return isMatch;
 };
 

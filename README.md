@@ -40,6 +40,10 @@ Configuration options with defaults shown
   "downloadPath": "", // Path to download .torrent files to. Optional.
   "discordWebhookUrl": "" // Discord webhook URI. Optional.
   "interval": 15 // Download interval.
+  "matchByAgeAndMaxSeeders": [
+    { maxAge: 600, maxSeeders: 5 },
+    { maxAge: 1200, maxSeeders: 2 }
+  ] // For new Freeleeh which uploaded some time ago but had a few seeders. 
 }
 ```
 
