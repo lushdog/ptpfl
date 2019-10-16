@@ -169,6 +169,10 @@ exports.torrentMatchesFilters = (torrent, config) => {
 		}
 	}
 
+	if (torrent.GoldenPopcorn && config.GoldenPopcorn) {
+		isMatch = true;
+	}
+
 	return isMatch;
 };
 
