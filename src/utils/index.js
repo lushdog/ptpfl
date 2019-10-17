@@ -82,14 +82,14 @@ const checkStatus = response => new Promise((resolve, reject) => {
 	}
 });
 
-exports.fetchTorrents = async (apiUser, apiKey) => {
+exports.fetchTorrents = async (apiUser, apiKey, page) => {
 	if (!apiUser || !apiKey) {
 		console.log('Please ensure you\'ve added your ApiUser and ApiKey details from your PTP profile to the config file. See the example config file for details.');
 		process.exit();
 	}
 
 	try {
-		const response = await fetch(freeleechEndpoint, {
+		const response = await fetch(page ? `${freeleechEndpoint}&page=${page}` : freeleechEndpoint, {
 			headers: {
 				'ApiUser': apiUser,
 				'ApiKey': apiKey
@@ -103,7 +103,7 @@ exports.fetchTorrents = async (apiUser, apiKey) => {
 
 		console.log(`newest torrent ${JSON.stringify(torrents[0])}`)
 
-		return { torrents, authKey: json.AuthKey, passKey: json.PassKey };
+		return { torrents, authKey: json.AuthKey, passKey: json.PassKey, totalResults: Number(json.TotalResults) };
 	} catch(error) {
 
 		console.log(error);

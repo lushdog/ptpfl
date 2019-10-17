@@ -4,9 +4,13 @@ const { validateConfig, fetchTorrents, torrentMatchesFilters, writeTorrentCache 
 
 module.exports = async function() {
 	try {
-		const config = await validateConfig(),
-			{ torrents, authKey, passKey } = await fetchTorrents(config.apiUser, config.apiKey);
-
+		const config = await validateConfig()
+		const	{ torrents, authKey, passKey, totalResults } = await fetchTorrents(config.apiUser, config.apiKey);
+		const pageNum = Math.ceil(totalResults/50)
+		for (let index = 2; index <= pageNum; index++) {
+			const result = await fetchTorrents(config.apiUser, config.apiKey, index);
+			torrents.push(...result.torrents);
+		}
 		for (const torrent of torrents) {
 			if (torrentMatchesFilters(torrent, config)) {
 				await downloadTorrent({ torrent, authKey, passKey }, config);
