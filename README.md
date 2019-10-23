@@ -18,7 +18,7 @@ Add a `downloadPath` to `config.json` to have the torrents added to your torrent
 
 ### Log
 
-pm2 log index
+`pm2 log index`
 
 ### Discord notifications
 
