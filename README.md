@@ -14,9 +14,11 @@ Add a `downloadPath` to `config.json` to have the torrents added to your torrent
 
 ### To run
 
-Need pm2
-
 `pm2 start index.js`
+
+### Log
+
+pm2 log index
 
 ### Discord notifications
 
