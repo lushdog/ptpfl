@@ -4,6 +4,8 @@ A node.js script that automates the downloading of PassThePopcorn freeleech torr
 
 ### To install
 
+`npm install pm2 -g`
+
 `npm install`
 
 Copy `example.config.json` to `config.json` and fill in your apiUser and apiKey credentials from your user profile.
@@ -14,8 +16,6 @@ Add a `downloadPath` to `config.json` to have the torrents added to your torrent
 
 Need pm2
 
-`npm install pm2 -g`
-`npm i`
 `pm2 start index.js`
 
 ### Discord notifications
