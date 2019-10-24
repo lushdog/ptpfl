@@ -1,3 +1,5 @@
+[中文](https://github.com/impressioncr/ptpfl/blob/master/README.zh-CN.md)
+
 # PassThePopcorn Freeleech Automator
 
 A node.js script that automates the downloading of PassThePopcorn freeleech torrents.
