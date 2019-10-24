@@ -16,19 +16,23 @@
 
 `npm install pm2 -g`
 
-安装依赖
+下载代码
+
+`git clone git@github.com:impressioncr/ptpfl.git`
+
+进入到ptpfl目录下, 安装依赖
 
 `npm install`
 
 修改配置文件: 复制`example.config.json`为`config.json`, 填上你的apiUser和apiKey(ptp网站edit-security)
 
-### 运行
+### 运行(ptpfl目录下)
 
-`pm2 start index.js --name "freedl"`
+`pm2 start index.js --name "myapp"`
 
 ### 查看日志
 
-`pm2 log freedl`
+`pm2 log myapp`
 
 ### Discord 通知
 
