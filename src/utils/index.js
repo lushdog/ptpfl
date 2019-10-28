@@ -112,11 +112,11 @@ exports.fetchTorrents = async (apiUser, apiKey, page) => {
 };
 
 const isOlderThan = (date, minutes) => {
-	const uploadTime = dayjs(date).add(8, 'hours')
-	const earliest = 1000 * minutes * 60,
-		time = Date.now() - earliest;
+	const uploadTime = dayjs(date)
+	const earliest = 1000 * minutes * 60
+	const now = dayjs().valueOf() - dayjs().utcOffset() * 60 * 1000
 	
-	return new Date(uploadTime) < time;
+	return uploadTime.diff(now) + earliest > 0;
 };
 
 exports.torrentMatchesFilters = (torrent, config) => {

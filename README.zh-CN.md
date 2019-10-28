@@ -18,7 +18,7 @@
 
 下载代码
 
-`git clone git@github.com:impressioncr/ptpfl.git`
+`git clone https://github.com/impressioncr/ptpfl.git`
 
 进入到ptpfl目录下, 安装依赖
 
@@ -33,6 +33,14 @@
 ### 查看日志
 
 `pm2 log myapp`
+
+### 暂停
+
+`pm2 stop myapp`
+
+### 重启
+
+`pm2 restart myapp`
 
 ### Discord 通知
 
@@ -66,6 +74,3 @@
 
 根据上传时间和做种人数组合筛选，因为有很多很老的种子加为免费种，做种人数很少，也有刷的价值。上边例子的过滤为: 上传10个小时以内，做种小于5; 上传20个小时以内, 做种小于5; 可以根据自己情况调整。
 
-#### 时间
-
-设置时间有关的过滤选项时，保证服务器时间为北京时间。
