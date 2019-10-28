@@ -116,7 +116,7 @@ const isOlderThan = (date, minutes) => {
 	const earliest = 1000 * minutes * 60
 	const now = dayjs().valueOf() - dayjs().utcOffset() * 60 * 1000
 	
-	return uploadTime.diff(now) + earliest > 0;
+	return uploadTime.diff(now) + earliest < 0;
 };
 
 exports.torrentMatchesFilters = (torrent, config) => {
