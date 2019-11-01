@@ -1,4 +1,4 @@
-## [中文](https://github.com/impressioncr/ptpfl/blob/master/README.zh-CN.md)
+## [中文](https://github.com/lushdog/ptpfl/blob/master/README.zh-CN.md)
 
 # PassThePopcorn Freeleech Automator
 

@@ -18,7 +18,7 @@
 
 下载代码
 
-`git clone https://github.com/impressioncr/ptpfl.git`
+`git clone https://github.com/lushdog/ptpfl.git`
 
 进入到ptpfl目录下, 安装依赖
 
