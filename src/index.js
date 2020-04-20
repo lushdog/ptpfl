@@ -5,8 +5,12 @@ const { validateConfig, fetchTorrents, torrentMatchesFilters, writeTorrentCache 
 module.exports = async function() {
 	try {
 		const config = await validateConfig()
+		const { page } = config
 		const	{ torrents, authKey, passKey, totalResults } = await fetchTorrents(config.apiUser, config.apiKey);
-		const pageNum = Math.ceil(totalResults/50)
+		let pageNum = Math.ceil(totalResults/50)
+		if (page !== -1) {
+			pageNum = page
+		}
 		if (pageNum >= 2) {
 			for (let index = 2; index <= pageNum; index++) {
 				const result = await fetchTorrents(config.apiUser, config.apiKey, index);
