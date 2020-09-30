@@ -28,7 +28,7 @@
 
 ### 运行(ptpfl目录下)
 
-`pm2 start index.js --name "myapp"`
+`pm2 start index.js --name "ptpfl"`
 
 ### 查看日志
 
