@@ -107,7 +107,7 @@ exports.fetchTorrents = async (apiUser, apiKey, page) => {
 	} catch(error) {
 
 		console.log(error);
-		process.exit();
+		return Promise.reject()
 	}
 };
 
