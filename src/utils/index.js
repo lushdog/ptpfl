@@ -165,7 +165,8 @@ exports.torrentMatchesFilters = (torrent, config) => {
 			if (minSize === -1 && maxSize === -1 ) {
 				isMatch = true;
 			} else {
-				if (torrent.Size >= minSize && torrent.Size <= maxSize) {
+				const sizeMatch = (torrent.Size >= minSize && maxSize === -1) || (torrent.Size <= maxSize && minSize === -1) || (torrent.Size >= minSize && torrent.Size <= maxSize)
+				if (sizeMatch) {
 					isMatch = true;
 				}
 			}
