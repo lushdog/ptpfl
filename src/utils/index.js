@@ -99,7 +99,7 @@ exports.fetchTorrents = async (apiUser, apiKey, page) => {
 		await checkStatus(response);
 
 		const json = await response.json(),
-		torrents = getTorrentsFromResponse(json);
+		torrents = getTorrentsFromResponse(json).map(torrent => torrent.FreeleechType === 'Freeleech');
 
 		console.log(`newest torrent ${JSON.stringify(torrents[0])}`)
 
