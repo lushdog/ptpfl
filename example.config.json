@@ -11,7 +11,7 @@
 	"downloadPath": "",
 	"discordWebhookUrl": "",
 	"interval": 10,
-	"GoldenPopcorn": true,
+	"GoldenPopcorn": false,
 	"page": 1,
 	"matchByAgeAndMaxSeeders": [
     { "maxAge": 600, "maxSeeders": 5 },
