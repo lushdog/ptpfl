@@ -13,3 +13,8 @@ docker run --name ptpfl -d -v /yourconfig:/config -v /yourwatch:/watch trancelif
 ```bash
 docker exec -it ptpfl /bin/sh 
 ```
+### 查看日志
+
+```bash
+ docker logs ptpfl -f
+```
