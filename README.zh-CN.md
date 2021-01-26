@@ -59,7 +59,7 @@
   "minsize": -1, // 种子最小大小（单位mb）. -1表示无限制.
   "maxsize": -1, // 种子最大大小（单位mb）. -1表示无限制.
   "maxAge": -1, // 种子上传最大时间（单位分钟）.
-  "downloadPath": "", // 下载软件的监控文件夹路径，种子文件下载到这里.
+  "downloadPath": "/watch", // 下载软件的监控文件夹路径，种子文件下载到这里.(如果用docker启动请填'/watch')
   "discordWebhookUrl": "", // Discord机器人url, 可选.
   "interval": 15,// 运行间隔时间. 实测一个小时超过20次管理员有可能会发私信要求调整！！，所以不要设置低于3.
   "GoldenPopcorn": true, // 是否下载金种（会忽略所有其他条件）.

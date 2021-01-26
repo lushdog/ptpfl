@@ -1,12 +1,13 @@
 const app = require('./src')
 const schedule = require('node-schedule')
-const { interval } = require('./config.json')
+const RUN_ENV = process.env.RUN_ENV
+const interval = require(RUN_ENV === 'docker' ? '/config/config.json' : './config.json').interval
 
 let index = 1
 const scheduleJob = async () => { 
   console.log(index)
   index ++
-  await app() 
+  await app()
 }
 
-const job  = schedule.scheduleJob(`*/${interval} * * * *`, scheduleJob)
+schedule.scheduleJob(`*/${interval} * * * *`, scheduleJob)
