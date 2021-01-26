@@ -1,15 +1,15 @@
 const dayjs = require('dayjs')
-
+const RUN_ENV = process.env.RUN_ENV
 const path = require('path'),
 	fs = require('fs'),
 	fetch = require('node-fetch'),
 	importFresh = require('import-fresh'),
 	directoryExists = require('directory-exists');
 
-const configPath = path.join(__dirname, '../../config.json'),
+const configPath = path.join(__dirname, RUN_ENV === 'docker' ? '../../../config/config.json' : '../../config.json'),
 	cachePath = path.join(__dirname, '../../data/cache.json'),
 	freeleechEndpoint = 'https://passthepopcorn.me/torrents.php?freetorrent=1&grouping=0&json=noredirect';
-
+	
 const getConfig = () => {
 	try {
 		return importFresh(configPath);
