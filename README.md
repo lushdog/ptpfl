@@ -1,4 +1,5 @@
 ## [中文](https://github.com/lushdog/ptpfl/blob/master/README.zh-CN.md)
+## [Docker运行](https://github.com/lushdog/ptpfl/blob/master/README.docker.md)
 
 # PassThePopcorn Freeleech Automator
 
