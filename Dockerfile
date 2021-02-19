@@ -5,7 +5,9 @@ ENV RUN_ENV=docker
 
 WORKDIR /app
 
-RUN npm install
+COPY package.json yarn.lock ./
+
+RUN yarn install
 
 COPY . .
 
