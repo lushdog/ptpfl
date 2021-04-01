@@ -1,4 +1,4 @@
-FROM node:14.15.4
+FROM node:14.15.4-slim
 
 ENV NODE_ENV=production
 ENV RUN_ENV=docker
