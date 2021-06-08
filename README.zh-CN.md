@@ -7,6 +7,7 @@
 依赖nodejs环境, 推荐使用nvm安装。
 
 `wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.34.0/install.sh | bash`
+
 `source .profile`
 
 然后安装nodejs
